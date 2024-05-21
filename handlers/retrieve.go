@@ -1,11 +1,14 @@
 package handlers
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"time"
+	"url-shortener/models"
 
 	"github.com/gorilla/mux"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 type RetrieveResponse struct {
@@ -16,8 +19,10 @@ func RetrieveURL(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	shortURL := vars["shortURL"]
 
-	entry, ok := urlStore[shortURL]
-	if !ok || time.Now().After(entry.Expiration) {
+	var entry models.URL
+	filter := bson.M{"short_url": shortURL, "expiration": bson.M{"$gt": time.Now()}}
+	err := urlCollection.FindOne(context.TODO(), filter).Decode(&entry)
+	if err != nil {
 		http.Error(w, "URL not found or expired", http.StatusNotFound)
 		return
 	}
