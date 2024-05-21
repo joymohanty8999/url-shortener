@@ -28,3 +28,33 @@ cd url-shortener
 ```sh
 go mod tidy
 ```
+
+###  Install and start MongoDB
+
+#### macOS
+
+######  1. Add the MongoDB Homebrew tap:
+
+```sh
+brew tap mongodb/brew
+```
+
+#####  2. Install MongoDB Community Edition:
+
+```sh
+brew install mongodb-community@6.0
+```
+
+###### 3. Start the MongoDB service:
+
+```sh
+brew services start mongodb/brew/mongodb-community@6.0
+```
+
+## Running the application
+
+### 1. Ensure MongoDB is running
+### 2. Start the GO Server
+```sh
+go run main.go
+```
