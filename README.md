@@ -39,7 +39,7 @@ go mod tidy
 brew tap mongodb/brew
 ```
 
-#####  2. Install MongoDB Community Edition:
+######  2. Install MongoDB Community Edition:
 
 ```sh
 brew install mongodb-community@6.0
