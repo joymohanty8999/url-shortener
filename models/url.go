@@ -3,6 +3,7 @@ package models
 import "time"
 
 type URL struct {
-	OriginalURL string
-	Expiration  time.Time
+	ShortURL    string    `bson:"short_url"`
+	OriginalURL string    `bson:"original_url"`
+	Expiration  time.Time `bson:"expiration"`
 }
