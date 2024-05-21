@@ -22,8 +22,9 @@ A URL shortener service built with Go, MongoDB, and Gorilla Mux. This service sh
 ```sh
 git clone https://github.com/your-username/url-shortener.git
 cd url-shortener
-
-### 2. Install GO dependencies
+```
+### 2. Install GO Dependencies
 
 ```sh
 go mod tidy
+```
