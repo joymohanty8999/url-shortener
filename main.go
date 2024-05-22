@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 	"url-shortener/handlers"
 
 	"github.com/gorilla/mux"
@@ -15,6 +16,12 @@ func main() {
 	router.HandleFunc("/{shortURL}", handlers.RetrieveURL).Methods("GET")
 	router.HandleFunc("/check", handlers.CheckURL).Methods("POST")
 
-	log.Println("Starting server on :8080")
-	log.Fatal(http.ListenAndServe(":8080", router))
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+
+	log.Println("Starting server on port:" + port)
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
