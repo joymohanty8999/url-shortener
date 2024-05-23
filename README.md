@@ -64,8 +64,22 @@ go build -o bin/url-shortener main.go
 ./bin/url-shortener
 ```
 ### Deploying to Heroku
+
+### 1. Create a Heroku App:
 ```sh
 heroku create your-app-name
 ```
-
-### 1. Create a Heroku App:
+### 2. Add MongoDB Add-on
+```sh
+heroku addons:create mongolab:sandbox
+```
+### 3. Set environment variables
+```sh
+heroku config:set MONGODB_URI="your-mongodb-uri"
+```
+### 4. Deploy to Heroku
+```sh
+git add .
+git commit -m "your message"
+git push heroku main
+```
