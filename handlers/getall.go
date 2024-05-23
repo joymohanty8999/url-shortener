@@ -32,6 +32,11 @@ func GetAllURLs(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if len(urls) == 0 {
+		http.Error(w, "No URLs found", http.StatusNotFound)
+		return
+	}
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(urls)
 
