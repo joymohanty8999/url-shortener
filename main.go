@@ -24,6 +24,7 @@ func main() {
 	router.HandleFunc("/shorten", handlers.ShortenURL).Methods("POST")
 	router.HandleFunc("/{shortURL}", handlers.RetrieveURL).Methods("GET")
 	router.HandleFunc("/check", handlers.CheckURL).Methods("POST")
+	router.HandleFunc("/urls", handlers.GetAllURLs).Methods("GET")
 
 	port := os.Getenv("PORT")
 
