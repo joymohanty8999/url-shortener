@@ -13,13 +13,14 @@ import (
 )
 
 func GetAllURLs(w http.ResponseWriter, r *http.Request) {
+
 	log.Println("GetAllURLs endpoint hit")
+
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	log.Println("Attempting to find URLs in the database")
 	collection := utils.Client.Database("url_shortener").Collection("urls")
-
 	if collection == nil {
 		log.Println("Collection is nil")
 		http.Error(w, "Database collection not found", http.StatusInternalServerError)
