@@ -32,6 +32,6 @@ func main() {
 		log.Fatal("$PORT must be set")
 	}
 
-	log.Println("Starting server on port:" + port)
+	log.Println("Router configured successfully. Starting server on port " + port)
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }
