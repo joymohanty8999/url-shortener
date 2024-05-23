@@ -83,3 +83,19 @@ git add .
 git commit -m "your message"
 git push heroku main
 ```
+
+## API Endpoints
+
+### Shorten URL
+
+POST /shorten
+```json
+{
+    "url":"https://your-website.com"
+}
+```
+
+### POSTMAN Screenshot
+```markdown
+![Shorten URL](screenshots/shorten.png)
+```
