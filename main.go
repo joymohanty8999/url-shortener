@@ -7,6 +7,7 @@ import (
 	"url-shortener/handlers"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 func main() {
@@ -37,11 +38,19 @@ func main() {
 	router.HandleFunc("/{shortURL}", handlers.RetrieveURL).Methods("GET")
 	//log.Println("Registered /{shortURL} endpoint")
 
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},
+		AllowedMethods: []string{"GET", "PUT", "POST", "DELETE"},
+		AllowedHeaders: []string{"*"},
+	})
+
+	handler := c.Handler(router)
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		log.Fatal("$PORT must be set")
 	}
 
 	log.Println("Starting server on port " + port)
-	log.Fatal(http.ListenAndServe(":"+port, router))
+	log.Fatal(http.ListenAndServe(":"+port, handler))
 }
