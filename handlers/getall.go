@@ -17,6 +17,7 @@ func GetAllURLs(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
+	log.Println("Attempting to find URLs in the database")
 	cursor, err := utils.Client.Database("url_shortener").Collection("urls").Find(ctx, bson.M{})
 	if err != nil {
 		log.Printf("Error finding URLs: %v\n", err)
@@ -26,6 +27,7 @@ func GetAllURLs(w http.ResponseWriter, r *http.Request) {
 	defer cursor.Close(ctx)
 
 	var urls []models.URL
+	log.Println("Attempting to decode URLs")
 	if err = cursor.All(ctx, &urls); err != nil {
 		log.Printf("Error decoding URLs: %v\n", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -33,7 +35,7 @@ func GetAllURLs(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(urls) == 0 {
-		log.Println("No URLs found")
+		log.Println("No URLs found in the database")
 		http.Error(w, "No URLs found", http.StatusNotFound)
 		return
 	}
