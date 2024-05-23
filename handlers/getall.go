@@ -42,6 +42,8 @@ func GetAllURLs(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Printf("Returning %d URLs\n", len(urls))
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(urls)
 
