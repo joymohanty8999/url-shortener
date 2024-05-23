@@ -94,3 +94,26 @@ POST /shorten
     "url":"https://your-website.com"
 }
 ```
+
+![shorten](https://github.com/joymohanty8999/url-shortener/assets/43529511/cb026aec-fa21-4726-bbaf-a16c558426dd)
+
+### Retrieve URL
+
+GET /{short_url}
+
+![retrieve](https://github.com/joymohanty8999/url-shortener/assets/43529511/f3dd5b42-0cda-4381-8dbf-ff13a200bffa)
+
+### Check validity of URL
+
+POST /check
+
+![check](https://github.com/joymohanty8999/url-shortener/assets/43529511/c44f9662-b5c3-4145-8fb7-d9858063745f)
+
+### Get All generated short URLs
+
+GET /urls
+
+![getallurls](https://github.com/joymohanty8999/url-shortener/assets/43529511/f6d97e2b-343f-4ea8-ba8a-719408649f58)
+
+
+
