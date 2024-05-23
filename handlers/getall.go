@@ -18,7 +18,15 @@ func GetAllURLs(w http.ResponseWriter, r *http.Request) {
 	defer cancel()
 
 	log.Println("Attempting to find URLs in the database")
-	cursor, err := utils.Client.Database("url_shortener").Collection("urls").Find(ctx, bson.M{})
+	collection := utils.Client.Database("url_shortener").Collection("urls")
+
+	if collection == nil {
+		log.Println("Collection is nil")
+		http.Error(w, "Database collection not found", http.StatusInternalServerError)
+		return
+	}
+
+	cursor, err := collection.Find(ctx, bson.M{})
 	if err != nil {
 		log.Printf("Error finding URLs: %v\n", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
