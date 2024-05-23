@@ -94,8 +94,3 @@ POST /shorten
     "url":"https://your-website.com"
 }
 ```
-
-### POSTMAN Screenshot
-```markdown
-![Shorten URL](screenshots/shorten.png)
-```
