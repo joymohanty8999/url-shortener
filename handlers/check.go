@@ -3,7 +3,6 @@ package handlers
 import (
 	"context"
 	"encoding/json"
-	"log"
 	"net/http"
 	"time"
 	"url-shortener/models"
@@ -24,7 +23,7 @@ type CheckResponse struct {
 
 func CheckURL(w http.ResponseWriter, r *http.Request) {
 
-	log.Println("Check endpoint hit")
+	//log.Println("Check endpoint hit")
 
 	var request CheckRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
