@@ -14,7 +14,7 @@ func main() {
 
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Welcome to the URL Shortener API. Use /shorten, /{shortURL}, /check endpoints"))
+		w.Write([]byte("Welcome to the URL Shortener API. Use /shorten, /{shortURL}, /check, /urls endpoints"))
 	})
 
 	router.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
