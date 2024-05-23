@@ -54,7 +54,18 @@ brew services start mongodb/brew/mongodb-community@6.0
 ## Running the application
 
 ### 1. Ensure MongoDB is running
-### 2. Start the GO Server
+### 2. Set your environment variables
 ```sh
-go run main.go
+export MONGODB_URI="your-mongodb-uri"
 ```
+### 3. Build and start the GO Server
+```sh
+go build -o bin/url-shortener main.go
+./bin/url-shortener
+```
+### Deploying to Heroku
+```sh
+heroku create your-app-name
+```
+
+### 1. Create a Heroku App:
