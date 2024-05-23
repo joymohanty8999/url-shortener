@@ -3,6 +3,7 @@ package handlers
 import (
 	"context"
 	"encoding/json"
+	"log"
 	"net/http"
 	"time"
 	"url-shortener/models"
@@ -16,6 +17,9 @@ type RetrieveResponse struct {
 }
 
 func RetrieveURL(w http.ResponseWriter, r *http.Request) {
+
+	log.Println("RetrieveURL endpoint hit")
+
 	vars := mux.Vars(r)
 	shortURL := vars["shortURL"]
 
