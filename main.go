@@ -38,6 +38,14 @@ func main() {
 	router.HandleFunc("/{shortURL}", handlers.RetrieveURL).Methods("GET")
 	//log.Println("Registered /{shortURL} endpoint")
 
+	// Handle preflight requests
+	router.Methods("OPTIONS").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		w.WriteHeader(http.StatusOK)
+	})
+
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
 		AllowedMethods: []string{"GET", "PUT", "POST", "DELETE"},
