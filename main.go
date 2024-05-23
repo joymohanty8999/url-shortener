@@ -28,14 +28,14 @@ func main() {
 	router.HandleFunc("/shorten", handlers.ShortenURL).Methods("POST")
 	log.Println("Registered /shorten endpoint")
 
-	router.HandleFunc("/{shortURL}", handlers.RetrieveURL).Methods("GET")
-	log.Println("Registered /{shortURL} endpoint")
-
 	router.HandleFunc("/check", handlers.CheckURL).Methods("POST")
 	log.Println("Registered /check endpoint")
 
 	router.HandleFunc("/urls", handlers.GetAllURLs).Methods("GET")
 	log.Println("Registered /urls endpoint")
+
+	router.HandleFunc("/{shortURL}", handlers.RetrieveURL).Methods("GET")
+	log.Println("Registered /{shortURL} endpoint")
 
 	port := os.Getenv("PORT")
 	if port == "" {
