@@ -34,6 +34,8 @@ func main() {
 	router.HandleFunc("/urls", handlers.GetAllURLs).Methods("GET")
 	//log.Println("Registered /urls endpoint")
 
+	router.HandleFunc("/r/{shortURL}", handlers.RedirectURL).Methods("GET")
+
 	router.HandleFunc("/{shortURL}", handlers.RetrieveURL).Methods("GET")
 	//log.Println("Registered /{shortURL} endpoint")
 
