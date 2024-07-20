@@ -14,33 +14,33 @@ func main() {
 	router := mux.NewRouter()
 
 	fs := http.FileServer(http.Dir("./front-end"))
-	router.PathPrefix("/").Handler(http.StripPrefix("/", fs))
+	router.PathPrefix("/static").Handler(http.StripPrefix("/static", fs))
 
 	//log.Println("Setting up routes")
 
-	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Welcome to the URL Shortener API. Use /shorten, /{shortURL}, /check, and /urls endpoints."))
+		w.Write([]byte("Welcome to the URL Shortener API. Use /api/shorten, /api/{shortURL}, /api/check, and /api/urls endpoints."))
 		//log.Println("Root endpoint hit")
 	}).Methods("GET")
 
-	router.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/api/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./favicon.ico")
 		//log.Println("Favicon endpoint hit")
 	}).Methods("GET")
 
-	router.HandleFunc("/shorten", handlers.ShortenURL).Methods("POST")
+	router.HandleFunc("/api/shorten", handlers.ShortenURL).Methods("POST")
 	//log.Println("Registered /shorten endpoint")
 
-	router.HandleFunc("/check", handlers.CheckURL).Methods("POST")
+	router.HandleFunc("/api/check", handlers.CheckURL).Methods("POST")
 	//log.Println("Registered /check endpoint")
 
-	router.HandleFunc("/urls", handlers.GetAllURLs).Methods("GET")
+	router.HandleFunc("/api/urls", handlers.GetAllURLs).Methods("GET")
 	//log.Println("Registered /urls endpoint")
 
-	router.HandleFunc("/delete-expired", handlers.DeleteExpiredURLs).Methods("DELETE", "OPTIONS")
+	router.HandleFunc("/api/delete-expired", handlers.DeleteExpiredURLs).Methods("DELETE", "OPTIONS")
 
-	router.HandleFunc("/{shortURL}", handlers.RetrieveURL).Methods("GET")
+	router.HandleFunc("/api/{shortURL}", handlers.RetrieveURL).Methods("GET")
 	//log.Println("Registered /{shortURL} endpoint")
 
 	// Handle preflight requests

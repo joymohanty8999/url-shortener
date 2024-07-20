@@ -1,13 +1,21 @@
 document.getElementById('shorten-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const url = document.getElementById('url-input').value;
-    const response = await fetch('/shorten', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ url })
-    });
-    const data = await response.json();
-    document.getElementById('result').innerText = `Shortened URL: ${data.shortenedUrl}`;
+    try {
+        const response = await fetch('/api/shorten', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ url: url })
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const data = await response.json();
+        document.getElementById('result').innerText = `Shortened URL: ${data.shortenedUrl}`;
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+        document.getElementById('result').innerText = `Error: ${error.message}`;
+    }
 });
