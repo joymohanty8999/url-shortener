@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"url-shortener/handlers"
 
 	"github.com/gorilla/mux"
@@ -18,9 +19,9 @@ func main() {
 
 	//log.Println("Setting up routes")
 
+	//serving index.html at root URL
 	router.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Welcome to the URL Shortener API. Use /api/shorten, /api/{shortURL}, /api/check, and /api/urls endpoints."))
+		http.ServeFile(w, r, filepath.Join("front-end", "index.html"))
 		//log.Println("Root endpoint hit")
 	}).Methods("GET")
 
