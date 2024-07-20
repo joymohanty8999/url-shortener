@@ -13,7 +13,7 @@ document.getElementById('shorten-form').addEventListener('submit', async functio
             throw new Error('Network response was not ok ' + response.statusText);
         }
         const data = await response.json();
-        document.getElementById('result').innerText = `Shortened URL: ${data.shortenedUrl}`;
+        document.getElementById('result').innerText = `Shortened URL: ${data.short_url || 'Error: Unable to shorten URL'}`;
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
         document.getElementById('result').innerText = `Error: ${error.message}`;
