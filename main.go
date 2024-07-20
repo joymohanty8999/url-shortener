@@ -13,6 +13,9 @@ import (
 func main() {
 	router := mux.NewRouter()
 
+	fs := http.FileServer(http.Dir("./front-end"))
+	router.PathPrefix("/").Handler(http.StripPrefix("/", fs))
+
 	//log.Println("Setting up routes")
 
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
