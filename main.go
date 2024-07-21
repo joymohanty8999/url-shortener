@@ -15,7 +15,7 @@ func main() {
 	router := mux.NewRouter()
 
 	fs := http.FileServer(http.Dir("./front-end"))
-	router.PathPrefix("/static").Handler(http.StripPrefix("/static", fs))
+	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs))
 
 	//log.Println("Setting up routes")
 
