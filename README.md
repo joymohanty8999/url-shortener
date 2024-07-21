@@ -117,7 +117,7 @@ git push heroku main
     }
     ```
 
-![Screenshot](https://imgur.com/THymmkd)
+![Shorten Image](https://i.imgur.com/THymmkd.png)
 
 ### Retrieve URL
 
@@ -131,6 +131,8 @@ git push heroku main
         "original_url": "http://www.example.com"
     }
     ```
+
+![Retrieve Image](https://i.imgur.com/VUH9yJu.png)
 
 ### Check validity of URL
 
@@ -153,6 +155,8 @@ git push heroku main
     }
     ```
 
+![Check Validity](https://imgur.com/a0IE22v.png)
+
 ### Get All generated short URLs
 
 - **URL:** `/api/shorten`
@@ -169,5 +173,19 @@ git push heroku main
     ]
     ```
 
+![Get All URLs](https://imgur.com/a6mJ298.png)
+
+## Future Scope and Improvements
+
+- **User Authentication:**
+  - Implement user authentication to allow users to create accounts and log in.
+  - Use OAuth providers (e.g., Google, Facebook) for easy login.
+
+- **User-Specific URLs:**
+  - Allow users to manage their own set of shortened URLs.
+  - Provide a dashboard where users can view, edit, and delete their URLs.
+
+- **Custom Short URLs:**
+  - Allow users to specify custom aliases for their shortened URLs (e.g., `https://short.url/customAlias`).
 
 
