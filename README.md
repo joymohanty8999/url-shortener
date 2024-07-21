@@ -113,7 +113,7 @@ git push heroku main
 - **Response:**
     ```json
     {
-    "short_url": "http://short.url/abc123"
+        "short_url": "http://short.url/abc123"
     }
     ```
 
@@ -132,15 +132,16 @@ git push heroku main
 - **Request Body:**
   ```json
   {
-  "shortURL": "abc123"
+    "url": "https://www.example.com"
   }
   ```
 
 - **Response:**
     ```json
     {
-    "original_url": "https://www.example.com",
-    "status": "active"
+        "exists": "true"
+        "short_url": "https://www.example.com",
+        "expired": "true/false"
     }
     ```
 
@@ -153,9 +154,9 @@ git push heroku main
     ```json
     [
     {
-    "short_url": "abc123",
-    "original_url": "https://www.example.com",
-    "status": "active"
+        "short_url": "abc123",
+        "original_url": "https://www.example.com",
+        "expiration": "date-time"
     }
     ]
     ```
