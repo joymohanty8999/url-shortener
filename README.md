@@ -117,12 +117,20 @@ git push heroku main
     }
     ```
 
+![Screenshot](https://imgur.com/THymmkd)
+
 ### Retrieve URL
 
 - **URL:** `/api/{shortURL}`
 - **Method:** `GET`
 
-- **Response:** `Redirects to Original URL`
+
+- **Response:** 
+    ```json
+    {
+        "original_url": "http://www.example.com"
+    }
+    ```
 
 ### Check validity of URL
 
@@ -153,11 +161,11 @@ git push heroku main
 - **Request Body:**
     ```json
     [
-    {
-        "short_url": "abc123",
-        "original_url": "https://www.example.com",
-        "expiration": "date-time"
-    }
+        {
+            "short_url": "abc123",
+            "original_url": "https://www.example.com",
+            "expiration": "date-time"
+        }
     ]
     ```
 
