@@ -20,7 +20,7 @@ func main() {
 	//log.Println("Setting up routes")
 
 	//serving index.html at root URL
-	router.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
+	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, filepath.Join("front-end", "index.html"))
 		//log.Println("Root endpoint hit")
 	}).Methods("GET")
