@@ -23,8 +23,6 @@ type CheckResponse struct {
 
 func CheckURL(w http.ResponseWriter, r *http.Request) {
 
-	//log.Println("Check endpoint hit")
-
 	var request CheckRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -36,13 +34,11 @@ func CheckURL(w http.ResponseWriter, r *http.Request) {
 	opts := options.FindOne().SetSort(bson.D{{Key: "expiration", Value: -1}})
 	err := urlCollection.FindOne(context.TODO(), filter, opts).Decode(&existingURL)
 	if err != nil {
-		// URL not found in the database
 		response := CheckResponse{Exists: false}
 		json.NewEncoder(w).Encode(response)
 		return
 	}
 
-	// URL found, check if it is expired
 	expired := time.Now().After(existingURL.Expiration)
 	response := CheckResponse{
 		Exists:   true,

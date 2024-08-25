@@ -32,8 +32,6 @@ func init() {
 
 func ShortenURL(w http.ResponseWriter, r *http.Request) {
 
-	//log.Println("Shorten endpoint hit")
-
 	var request ShortenRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)

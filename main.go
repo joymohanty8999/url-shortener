@@ -8,41 +8,41 @@ import (
 	"url-shortener/handlers"
 
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 	"github.com/rs/cors"
 )
 
 func main() {
+
+	// Load environment variables from .env file
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
 	router := mux.NewRouter()
 
 	fs := http.FileServer(http.Dir("./front-end"))
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs))
 
-	//log.Println("Setting up routes")
-
 	//serving index.html at root URL
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, filepath.Join("front-end", "index.html"))
-		//log.Println("Root endpoint hit")
 	}).Methods("GET")
 
 	router.HandleFunc("/api/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./favicon.ico")
-		//log.Println("Favicon endpoint hit")
 	}).Methods("GET")
 
 	router.HandleFunc("/api/shorten", handlers.ShortenURL).Methods("POST")
-	//log.Println("Registered /shorten endpoint")
 
 	router.HandleFunc("/api/check", handlers.CheckURL).Methods("POST")
-	//log.Println("Registered /check endpoint")
 
 	router.HandleFunc("/api/urls", handlers.GetAllURLs).Methods("GET")
-	//log.Println("Registered /urls endpoint")
 
 	router.HandleFunc("/api/delete-expired", handlers.DeleteExpiredURLs).Methods("DELETE", "OPTIONS")
 
 	router.HandleFunc("/api/{shortURL}", handlers.RetrieveURL).Methods("GET")
-	//log.Println("Registered /{shortURL} endpoint")
 
 	// Handle preflight requests
 	router.Methods("OPTIONS").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
