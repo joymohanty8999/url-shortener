@@ -26,3 +26,7 @@ document.getElementById('shorten-form').addEventListener('submit', async functio
         document.getElementById('result').innerText = `Error: ${error.message}`;
     }
 });
+
+document.getElementById("viewUrls").addEventListener("click", function () {
+    window.open("urls.html", "_blank");
+});
