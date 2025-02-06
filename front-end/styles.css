@@ -34,3 +34,10 @@ button:hover {
 #result {
     margin-top: 20px;
 }
+
+#result-container {
+    min-height: 50px;  /* Increase height so it always has space */
+    margin-top: 10px;
+    font-size: 18px;
+    text-align: center;
+}
