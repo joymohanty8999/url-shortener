@@ -39,6 +39,10 @@ func main() {
 		http.ServeFile(w, r, filepath.Join("front-end", "index.html"))
 	}).Methods("GET")
 
+	router.HandleFunc("/urls.html", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, filepath.Join("front-end", "urls.html"))
+	}).Methods("GET")
+
 	router.HandleFunc("/api/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./favicon.ico")
 	}).Methods("GET")
