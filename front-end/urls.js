@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    fetch("/api/urls") // Use the correct backend route
+    fetch("https://snip-snip-go-2f69a42960b8.herokuapp.com/api/urls") // Use the correct backend route
         .then(response => response.json())
         .then(data => {
             const urlList = document.getElementById("urlList");
