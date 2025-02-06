@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             data.forEach(url => {
                 const shortUrl = `https://snip-snip-go-2f69a42960b8.herokuapp.com/api/${url.short_url}`;
-                urlList.innerHTML += `<p><a href="${shortUrl}" target="_blank">${shortUrl}</a> → ${url.original_url}</p>`;
+                urlList.innerHTML += `<p><a href="${shortUrl}" target="_blank">${url.short_url}</a> → ${url.original_url}</p>`;
             });
         })
         .catch(error => console.error("Error fetching URLs:", error));
