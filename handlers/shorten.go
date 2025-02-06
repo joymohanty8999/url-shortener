@@ -14,7 +14,7 @@ import (
 
 var urlCollection *mongo.Collection
 
-const baseURL = "https://quick-snip-url.herokuapp.com/api/"
+const baseURL = "https://snip-it-go.herokuapp.com/api/"
 const expirationDuration = 2 * time.Hour //adding a time of 2 hours per short url generated
 
 type ShortenRequest struct {
