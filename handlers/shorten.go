@@ -39,7 +39,7 @@ func ShortenURL(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Remove any expired entries for the original URL
-	filter := bson.M{"original_url": request.URL, "expiration": bson.M{"$lt": time.Now()}}
+	filter := bson.M{"original_url": request.URL, "expiration": bson.M{"$lte": time.Now().UTC().Truncate(time.Millisecond)}}
 	_, err := urlCollection.DeleteMany(context.TODO(), filter)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -48,7 +48,7 @@ func ShortenURL(w http.ResponseWriter, r *http.Request) {
 
 	// Check if a non-expired URL already exists
 	var existingURL models.URL
-	filter = bson.M{"original_url": request.URL, "expiration": bson.M{"$gt": time.Now()}}
+	filter = bson.M{"original_url": request.URL, "expiration": bson.M{"$lte": time.Now().UTC().Truncate(time.Millisecond)}}
 	err = urlCollection.FindOne(context.TODO(), filter).Decode(&existingURL)
 	if err == nil {
 		// Return the existing non-expired short URL
@@ -65,7 +65,7 @@ func ShortenURL(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	expiration := time.Now().Add(expirationDuration)
+	expiration := time.Now().Add(expirationDuration).Truncate(time.Millisecond)
 	newURL := models.URL{ShortURL: shortURL, OriginalURL: request.URL, Expiration: expiration}
 
 	_, err = urlCollection.InsertOne(context.TODO(), newURL)
