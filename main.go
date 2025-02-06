@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -18,6 +19,14 @@ func main() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatalf("Error loading .env file")
+	}
+
+	// Print environment variable for debugging
+	mongoURI := os.Getenv("MONGODB_URI")
+	fmt.Println("MONGODB_URI:", mongoURI) // Debugging line
+
+	if mongoURI == "" {
+		log.Fatal("Error: MONGODB_URI environment variable not set")
 	}
 
 	router := mux.NewRouter()

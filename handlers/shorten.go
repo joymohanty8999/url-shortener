@@ -14,7 +14,7 @@ import (
 
 var urlCollection *mongo.Collection
 
-const baseURL = "http://short.url/"
+const baseURL = "https://url-shortner-app-c77549506d40.herokuapp.com/api/"
 const expirationDuration = 2 * time.Hour //adding a time of 2 hours per short url generated
 
 type ShortenRequest struct {

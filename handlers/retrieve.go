@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"context"
-	"encoding/json"
 	"net/http"
 	"time"
 	"url-shortener/models"
@@ -30,6 +29,7 @@ func RetrieveURL(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response := RetrieveResponse{OriginalURL: entry.OriginalURL}
-	json.NewEncoder(w).Encode(response)
+	//log.Println("Redirecting:", shortURL, "➡", entry.OriginalURL)
+
+	http.Redirect(w, r, entry.OriginalURL, http.StatusFound)
 }
