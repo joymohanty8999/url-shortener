@@ -6,31 +6,36 @@ body {
     align-items: center;
     height: 100vh;
 }
+
 .container {
+    width: 650px; /* Increase width */
+    padding: 50px; /* Add more padding */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    background: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
 }
+
 input {
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    width: 85%; /* Make input wider */
+    padding: 15px; /* Increase padding */
+    font-size: 18px; /* Make text larger */
+    margin: 15px 0; /* Increase spacing */
 }
+
 button {
+    width: 90%;
     padding: 10px 20px;
     background: #007BFF;
     color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
 }
+
 button:hover {
     background: #0056b3;
 }
+
 #result {
     margin-top: 20px;
 }
