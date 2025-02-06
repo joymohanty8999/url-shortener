@@ -17,7 +17,7 @@ You can try out the URL shortener at the following link:
 
 ## Usage
 
-1. Visit the [URL Shortener App](https://url-shortner-app-c77549506d40.herokuapp.com/).
+1. Visit the [URL Shortener App](https://snip-snip-go-2f69a42960b8.herokuapp.com/).
 2. Enter a long URL in the input field.
 3. Click on the "Shorten" button.
 4. The shortened URL will be displayed below the input field.

@@ -14,8 +14,8 @@ import (
 func DeleteExpiredURLs(w http.ResponseWriter, r *http.Request) {
 	collection := utils.Client.Database("url-shortener").Collection("urls")
 
-	// Get current UTC time
-	currentTime := time.Now().UTC()
+	// Get current UTC time and round to match MongoDB precision
+	currentTime := time.Now().UTC().Truncate(time.Millisecond)
 
 	// Find all expired URLs (for debugging)
 	var expiredURLs []models.URL
