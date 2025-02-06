@@ -36,8 +36,11 @@ func DeleteExpiredURLs(w http.ResponseWriter, r *http.Request) {
 	// Log the expired URLs
 	if len(expiredURLs) == 0 {
 		log.Println("No expired URLs found")
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("No expired URLs found"))
+		return
 	} else {
-		log.Println("Expired URLs:", expiredURLs)
+		log.Println("Expired URLs found, deleting now:", expiredURLs)
 	}
 
 	// Attempt to delete expired URLs
