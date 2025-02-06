@@ -12,7 +12,7 @@ import (
 )
 
 func DeleteExpiredURLs(w http.ResponseWriter, r *http.Request) {
-	collection := utils.Client.Database("url-shortener").Collection("urls")
+	collection := utils.Client.Database("url_shortener").Collection("urls")
 
 	// Get current UTC time and round to match MongoDB precision
 	currentTime := time.Now().UTC().Truncate(time.Millisecond)
