@@ -12,10 +12,10 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-var urlCollection *mongo.Collection
+var urlCollection *mongo.Collection // collection to store the shortened URLs in our MongoDB database
 
-const baseURL = "https://snip-snip-go-2f69a42960b8.herokuapp.com/api/"
-const expirationDuration = 24 * time.Hour //adding a time of 24 hours per short url generated
+const baseURL = "https://snip-snip-go-2f69a42960b8.herokuapp.com/api/" // base URL for the shortened URLs (can be changed to your own domain)
+const expirationDuration = 24 * time.Hour                              //adding a time of 24 hours per short url generated
 
 type ShortenRequest struct {
 	URL string `json:"url"`
@@ -26,7 +26,7 @@ type ShortenResponse struct {
 }
 
 func init() {
-	utils.InitDB()
+	utils.InitDB() // Ensures that our MongoDB client is initialized before any of the handlers are called
 	urlCollection = utils.GetCollection(utils.Client, "urls")
 }
 
@@ -34,7 +34,7 @@ func ShortenURL(w http.ResponseWriter, r *http.Request) {
 
 	var request ShortenRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		http.Error(w, err.Error(), http.StatusBadRequest) // returns a 400 Bad Request error if the request body is not in the expected format
 		return
 	}
 
@@ -57,13 +57,15 @@ func ShortenURL(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	//Generating new short url
+	// Generate a new 8-character base62 string for the short URL if it doesn't already exist
 
 	shortURL, err := utils.GenerateRandomBase62String(8)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	// Create a MongoDB document for the new URL, its expiration time, and insert it into the collection
 
 	expiration := time.Now().Add(expirationDuration).Truncate(time.Millisecond)
 	newURL := models.URL{ShortURL: shortURL, OriginalURL: request.URL, Expiration: expiration}
@@ -74,6 +76,8 @@ func ShortenURL(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	// Return the shortened URL to the user
 
 	response := ShortenResponse{ShortURL: baseURL + shortURL}
 	json.NewEncoder(w).Encode(response)

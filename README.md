@@ -137,7 +137,7 @@ git push heroku main
 ### Check validity of URL
 
 
-- **URL:** `/api/shorten`
+- **URL:** `/api/check`
 - **Method:** `POST`
 - **Request Body:**
   ```json
@@ -159,7 +159,7 @@ git push heroku main
 
 ### Get All generated short URLs
 
-- **URL:** `/api/shorten`
+- **URL:** `/api/urls`
 - **Method:** `POST`
 
 - **Request Body:**

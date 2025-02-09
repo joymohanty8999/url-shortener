@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"crypto/rand"
+	"crypto/rand" // better than math/rand for generating random numbers as it uses system-generated entropy rather than a fixed seed
 	"math/big"
 	"strings"
 )

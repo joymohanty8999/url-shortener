@@ -15,10 +15,10 @@ import (
 
 func main() {
 
-	// Load environment variables from .env file
+	// Load environment variables from .env file -> This allows us to securely store sensitive information such as our MongoDB URI connection string
 	err := godotenv.Load()
 	if err != nil {
-		log.Println("Warning: No .env file found, using system environment variables")
+		log.Println("Warning: No .env file found, using system environment variables") // falls back to system environment variables if .env file is not found to ensure app is always able to run
 	}
 
 	// Print environment variable for debugging
@@ -55,15 +55,15 @@ func main() {
 
 	//API Endpoints
 
-	router.HandleFunc("/api/shorten", handlers.ShortenURL).Methods("POST")
+	router.HandleFunc("/api/shorten", handlers.ShortenURL).Methods("POST") // shortens the user-provided URL to a base62 encoded link and stores it in MongoDB
 
-	router.HandleFunc("/api/check", handlers.CheckURL).Methods("POST")
+	router.HandleFunc("/api/check", handlers.CheckURL).Methods("POST") // checks if the user-provided URL is already in the database
 
-	router.HandleFunc("/api/urls", handlers.GetAllURLs).Methods("GET")
+	router.HandleFunc("/api/urls", handlers.GetAllURLs).Methods("GET") // retrieves all shortened URLs stored in the database
 
-	router.HandleFunc("/api/delete-expired", handlers.DeleteExpiredURLs).Methods("DELETE", "OPTIONS")
+	router.HandleFunc("/api/delete-expired", handlers.DeleteExpiredURLs).Methods("DELETE", "OPTIONS") // automatically deletes expired URLs from the database
 
-	router.HandleFunc("/api/{shortURL}", handlers.RetrieveURL).Methods("GET")
+	router.HandleFunc("/api/{shortURL}", handlers.RetrieveURL).Methods("GET") // When a user visits a shortened URL, this endpoint retrieves the original URL from the database and redirects the user to the original URL
 
 	// Handle preflight requests
 	router.Methods("OPTIONS").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
