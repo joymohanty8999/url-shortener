@@ -29,7 +29,11 @@ func main() {
 		log.Fatal("Error: MONGODB_URI environment variable not set")
 	}
 
+	// Initializing Gorilla Mux router
+
 	router := mux.NewRouter()
+
+	// serving front-end files
 
 	fs := http.FileServer(http.Dir("./front-end"))
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs))
@@ -39,6 +43,8 @@ func main() {
 		http.ServeFile(w, r, filepath.Join("front-end", "index.html"))
 	}).Methods("GET")
 
+	//serving urls.html at /urls.html
+
 	router.HandleFunc("/urls.html", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, filepath.Join("front-end", "urls.html"))
 	}).Methods("GET")
@@ -46,6 +52,8 @@ func main() {
 	router.HandleFunc("/api/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./favicon.ico")
 	}).Methods("GET")
+
+	//API Endpoints
 
 	router.HandleFunc("/api/shorten", handlers.ShortenURL).Methods("POST")
 
