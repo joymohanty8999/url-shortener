@@ -6,7 +6,7 @@ A URL shortener service built with Go, MongoDB, and Gorilla Mux. This service sh
 
 You can try out the URL shortener at the following link:
 
-[URL Shortener App](https://url-shortner-app-c77549506d40.herokuapp.com/)
+[URL Shortener App](https://snip-snip-go-2f69a42960b8.herokuapp.com)
 
 ## Features
 
