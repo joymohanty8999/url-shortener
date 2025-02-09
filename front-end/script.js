@@ -28,5 +28,5 @@ document.getElementById('shorten-form').addEventListener('submit', async functio
 });
 
 document.getElementById("viewUrls").addEventListener("click", function () {
-    window.open("urls.html", "_blank");
+    window.location.href = "urls.html";
 });
