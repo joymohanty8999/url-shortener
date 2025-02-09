@@ -38,10 +38,10 @@ func ConnectDB() *mongo.Client {
 }
 
 func GetCollection(client *mongo.Client, collectionName string) *mongo.Collection {
-	collection := client.Database("url_shortener").Collection(collectionName)
+	collection := client.Database("url_shortener").Collection(collectionName) // Helps retrieve specific collections from our database
 	return collection
 }
 
 func InitDB() {
-	Client = ConnectDB()
+	Client = ConnectDB() // ensures client is initialized before any handlers are called
 }

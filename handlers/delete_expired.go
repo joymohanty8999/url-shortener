@@ -17,12 +17,12 @@ func DeleteExpiredURLs(w http.ResponseWriter, r *http.Request) {
 	// Get current UTC time and round to match MongoDB precision
 	currentTime := time.Now().UTC().Truncate(time.Millisecond)
 
-	// Find all expired URLs (for debugging)
+	// Query MongoDB for expired URLs and store them in a slice or array
 	var expiredURLs []models.URL
 	cursor, err := collection.Find(r.Context(), bson.M{"expiration": bson.M{"$lte": currentTime}})
 	if err != nil {
 		log.Printf("Error finding expired URLs: %v", err)
-		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		http.Error(w, "Internal server error", http.StatusInternalServerError) // Return a 500 Internal Server Error if the query fails
 		return
 	}
 	defer cursor.Close(r.Context())
@@ -50,6 +50,8 @@ func DeleteExpiredURLs(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
 		return
 	}
+
+	// Log the number of deleted URLs and return a success response
 
 	log.Printf("Deleted %v expired URLs", result.DeletedCount)
 	w.WriteHeader(http.StatusOK)
