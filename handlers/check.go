@@ -11,9 +11,13 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+// The request struct for the check endpoint which holds the URL to check
+
 type CheckRequest struct {
 	URL string `json:"url"`
 }
+
+// The repsonse struct for the check endpoint
 
 type CheckResponse struct {
 	Exists   bool   `json:"exists"`
@@ -31,7 +35,7 @@ func CheckURL(w http.ResponseWriter, r *http.Request) {
 
 	var existingURL models.URL
 	filter := bson.M{"original_url": request.URL}
-	opts := options.FindOne().SetSort(bson.D{{Key: "expiration", Value: -1}})
+	opts := options.FindOne().SetSort(bson.D{{Key: "expiration", Value: -1}}) // Gets the most recent entry for the URL
 	err := urlCollection.FindOne(context.TODO(), filter, opts).Decode(&existingURL)
 	if err != nil {
 		response := CheckResponse{Exists: false}
