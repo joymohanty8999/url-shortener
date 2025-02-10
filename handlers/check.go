@@ -43,7 +43,7 @@ func CheckURL(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	expired := time.Now().After(existingURL.Expiration)
+	expired := time.Now().After(existingURL.Expiration) // Compares the current time with the expiration time
 	response := CheckResponse{
 		Exists:   true,
 		ShortURL: baseURL + existingURL.ShortURL,
